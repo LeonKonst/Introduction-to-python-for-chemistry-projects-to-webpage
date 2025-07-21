@@ -78,3 +78,32 @@ button, input[type="submit"] {
   cursor: pointer;
   font-size: 1em;
 }
+
+
+fieldset {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #ccc;
+  margin-bottom: 24px;
+}
+
+legend {
+  font-weight: bold;
+  color: #2a5d84;
+  margin-bottom: 8px;
+}
+
+label, input {
+    display: inline-flex;
+    padding: 4px;
+}
+
+#knownVariables {
+  display: none;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#result{
+  border: 1px solid #ccc;
+  margin-bottom: 24px;
+}
