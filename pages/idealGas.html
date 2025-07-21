@@ -1,11 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ideal Gas Law Calculator </title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="image/beaker.png" type="image/x-icon">
+        <link rel="stylesheet" href="styles.css">
+        <title>Ideal Gas Law Calculator</title>
+    </head>
+    <body>
+        <header>
+            <h1>Ideal Gas Law Calculator</h1>
+        </header>
+        <main>
+            <form action="">
+                <fieldset id="variableToCalculate">
+                    <legend>Which variable you want to calculate from the ideal gas law, assuming the rest are known?</legend>
+                    <input type="radio" id="pressure" name="pressure" value="pressure" />
+                    <label for="pressure">Pressure</label><br />
+
+                    <input type="radio" id="volume" name="volume" value="volume" />
+                    <label for="volume">Volume</label><br />
+
+                    <input type="radio" id="temperature" name="temperature" value="temperature" />
+                    <label for="temperature">Temperature</label>
+
+                    <input type="radio" id="moles" name="moles" value="moles" />
+                    <label for="moles">Number of moles</label>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Fill the values of the known variables</legend>
+                    <input type="number" id="pressure" name="pressure" value="pressure" />
+                    <label for="pressure">Pressure</label>
+
+                    <input type="number" id="volume" name="volume" value="volume" />
+                    <label for="volume">Volume</label>
+
+                    <input type="number" id="temperature" name="temperature" value="temperature" />
+                    <label for="temperature">Temperature</label>
+
+                    <input type="number" id="moles" name="moles" value="moles" />
+                    <label for="moles">Number of moles</label>
+
+                </fieldset>
+
+            </form>
+            <fieldset>
+                <legend>Which variable you want to calculate from the ideal gas law, assuming the rest are known?</legend>
+                <input type="radio" id="pressure" name="pressure" value="pressure" />
+                <label for="pressure">Pressure</label>
+
+                <input type="radio" id="volume" name="volume" value="volume" />
+                <label for="volume">Volume</label>
+
+                <input type="radio" id="temperature" name="temperature" value="temperature" />
+                <label for="temperature">Temperature</label>
+
+                <input type="radio" id="moles" name="moles" value="moles" />
+                <label for="moles">Number of moles</label>
+
+            </fieldset>
+            <p><a href="../index.html">Main Page</a> Back to the main page </p>
+            <h2>Other projects:</h2>
+            <ul>
+                <li>
+                    <p>
+                        <a href="pages/reactionElement.html">Reaction Element Finder</a>
+                        Description to be added
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a href="pages/organicIUPAC.html">IUPAC names of organic compounds</a>
+                        Description to be added
+                    </p>
+                </li>
+            </ul>
+        </main>
+        <footer>
+            <p><span id="current-year"></span></p>
+        </footer>
+        <script src="script.js"></script>
+    </body>
 </html>
