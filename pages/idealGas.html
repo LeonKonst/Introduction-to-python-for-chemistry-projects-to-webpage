@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="image/beaker.png" type="image/x-icon">
+        <link rel="shortcut icon" href="../image/beaker.png" type="image/x-icon">
         <link rel="stylesheet" href="styles.css">
         <title>Ideal Gas Law Calculator</title>
     </head>
@@ -16,10 +16,10 @@
                 <fieldset id="variableToCalculate">
                     <legend>Which variable you want to calculate from the ideal gas law, assuming the rest are known?</legend>
                     <input type="radio" id="pressure" name="pressure" value="pressure" />
-                    <label for="pressure">Pressure</label><br />
+                    <label for="pressure">Pressure</label>
 
                     <input type="radio" id="volume" name="volume" value="volume" />
-                    <label for="volume">Volume</label><br />
+                    <label for="volume">Volume</label>
 
                     <input type="radio" id="temperature" name="temperature" value="temperature" />
                     <label for="temperature">Temperature</label>
@@ -44,23 +44,11 @@
                     <label for="moles">Number of moles</label>
 
                 </fieldset>
-
+                <button id="clearBtn">Clear all</button>
             </form>
-            <fieldset>
-                <legend>Which variable you want to calculate from the ideal gas law, assuming the rest are known?</legend>
-                <input type="radio" id="pressure" name="pressure" value="pressure" />
-                <label for="pressure">Pressure</label>
+            <div id="result">
 
-                <input type="radio" id="volume" name="volume" value="volume" />
-                <label for="volume">Volume</label>
-
-                <input type="radio" id="temperature" name="temperature" value="temperature" />
-                <label for="temperature">Temperature</label>
-
-                <input type="radio" id="moles" name="moles" value="moles" />
-                <label for="moles">Number of moles</label>
-
-            </fieldset>
+            </div>
             <p><a href="../index.html">Main Page</a> Back to the main page </p>
             <h2>Other projects:</h2>
             <ul>
