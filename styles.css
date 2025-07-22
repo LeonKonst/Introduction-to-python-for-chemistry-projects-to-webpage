@@ -103,7 +103,23 @@ label, input {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-#result{
+#knownVariables input {
+  width: 100px;
+  margin-bottom: 8px;
+}
+
+#knownVariables label {
+  width: 100px;
+  margin-right: 8px;
+}
+
+#result, #errors{
   border: 1px solid #ccc;
   margin-bottom: 24px;
+}
+
+#errors p {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 8px;
 }
