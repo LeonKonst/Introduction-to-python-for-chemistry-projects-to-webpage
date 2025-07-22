@@ -35,25 +35,35 @@
                     <div id="pressureInputDiv">
                         <label for="pressureInput"> Pressure</label>
                         <input type="number" class="knownInput" id="pressureInput" name="pressure" value=1 placeholder="Pressure in atm">
-                        <span class="inputUnits">(atm)</span>
+                        <select id="pressureUnit" name="pressureUnit">
+                            <option value="atm" selected>atm</option>
+                            <option value="bar">bar</option>
+                            <option value="psi">psi</option>
+                        </select>
                     </div>
 
                     <div id="volumeInputDiv">
                         <label for="volumeInput">Volume</label>
                         <input type="number" class="knownInput" id="volumeInput" name="volume" value=1 placeholder="Volume in liters">
-                        <span class="inputUnits">(l)</span>
+                        <select id="volumeUnit" name="volumeUnit">
+                            <option value="liter" selected>l</option>
+                            <option value="m3">m³</option>
+                        </select>
                     </div>
 
                     <div id="temperatureInputDiv">
                         <label for="temperatureInput">Temperature</label>
                         <input type="number" class="knownInput" id="temperatureInput" name="temperature" value=300 placeholder="Temperature in K">
-                        <span class="inputUnits">(K)</span>
+                        <select id="temperatureUnit" name="temperatureUnit">
+                            <option value="Kelvin" selected>K</option>
+                            <option value="celsius">°C</option>
+                        </select>
                     </div>
 
                     <div id="molesInputDiv">
-                        <label for="molesInput">Number of moles</label>
+                        <label for="molesInput">No. of moles</label>
                         <input type="number" class="knownInput" id="molesInput" name="moles" value=1 placeholder="Number of moles">
-                        <span class="inputUnits">(mol)</span>
+                        <span class="inputUnits">mol</span>
                     </div>
 
                 </fieldset>
