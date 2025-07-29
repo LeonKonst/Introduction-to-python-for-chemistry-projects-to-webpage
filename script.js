@@ -2,26 +2,49 @@ let variableToCalculateFieldset = document.getElementById('variableToCalculate')
 let knownVariablesFieldset = document.getElementById('knownVariables');
 let result = document.getElementById('resultValue');
 let unitSelectors = document.querySelectorAll(".unitSelector");
-let knownInputs = document.querySelectorAll(".knownInput")
+
+let divOfKnownInputs = document.querySelectorAll(".knownInput")
 
 
-function addListenerToCalculateResults(elements, change) {
-    elements.forEach(element => {
-        element.addEventListener(change, () => {  
-            displayKnownVariables()
-            result.textContent = displayResults();
-    })}
-)
+function checkAndCalculateOnChange(elements){
+    elements.forEach(element =>{
+        element.addEventListener("change", () => 
+            {
+                result.textContent = displayResults();
+            }
+        )
+    } )
 }
 
-addListenerToCalculateResults(unitSelectors,"change");
-addListenerToCalculateResults(knownInputs,"input");
+checkAndCalculateOnChange(unitSelectors);
+checkAndCalculateOnChange(divOfKnownInputs);
+
+divOfKnownInputs.forEach(element =>{
+        
+        element.addEventListener("change", () =>
+            {
+                let inputElement = element.querySelector("input");
+                let unitValue = element.querySelector("select").value;
+                toggleClass(inputElement, inputElement.value > lowerValidLimit(inputElement.name,unitValue));
+                console.log( inputElement.value);
+            }
+        )
+    }
+)
+
+
+function lowerValidLimit(variable, unit){
+    if(variable==="temperature"&& unit==="celsius"){
+        return -273.15;
+    }
+    return 0;
+}
+
 
 variableToCalculateFieldset.addEventListener("change", () => {  
             displayKnownVariables()
-            result.textContent = displayResults();
 })
-
+ 
 
 function displayKnownVariables(){
     // Fetch the selected unknown variable 
@@ -91,84 +114,23 @@ function temperatureUntiConversion(temperature, unit){
     return temperature; // Assume it's already in Kelvin
 }
 
-// let errorPressure = document.getElementById('errorPressure');
-// let errorVolume = document.getElementById('errorVolume');
-// let errorTemperature = document.getElementById('errorTemperature');
-// let errorMoles = document.getElementById('errorMoles');
-// let resultUnit = document.getElementById('resultUnits')
+// Check input validity
 
-// function validatePressure() {
-//     let pressureInput = document.getElementById('pressureInput');
-//     if (isNaN(pressureInput.value) || pressureInput.value <= 0) {
-//         errorPressure.textContent = 'Please enter a valid pressure value greater than 0.';
-//         return false;
-//     }
-//     errorPressure.textContent = '';
-//     return true;
-// }
-
-// function validateVolume() {
-//     let volumeInput = document.getElementById('volumeInput');
-//     if (isNaN(volumeInput.value) || volumeInput.value <= 0) {
-//         errorVolume.textContent = 'Please enter a valid volume value greater than 0.';
-//         return false;
-//     }
-//     errorVolume.textContent = '';
-//     return true;
-// }
-
-// function validateTemperature() {
-//     let temperatureInput = document.getElementById('temperatureInput');
-//     if (isNaN(temperatureInput.value) || temperatureInput.value <= 0) {
-//         errorTemperature.textContent = 'Please enter a valid temperature value greater than 0.';
-//         return false;
-//     }
-//     errorTemperature.textContent = '';
-//     return true;
-// }
-
-// function validateMoles() {
-//     let molesInput = document.getElementById('molesInput');
-//     if (isNaN(molesInput.value) || molesInput.value <= 0) {
-//         errorMoles.textContent = 'Please enter a valid moles value greater than 0.';
-//         return false;
-//     }
-//     errorMoles.textContent = ''
-//     return true;
-// }
-
-// function clearErrors() {
-//     errorPressure.textContent = '';
-//     errorVolume.textContent = '';
-//     errorTemperature.textContent = '';
-//     errorMoles.textContent = '';
-// }
-
-// function validateInputs() {
-//     if (!validatePressure() || !validateVolume() || !validateTemperature() || !validateMoles()) {
-//         return false;
-//     }
-//     return true;
-// }
+function toggleClass(element, isValid) {
+    element.classList.toggle('valid', isValid);
+    element.classList.toggle('invalid', !isValid);
+}
 
 
-
-//
-
-// let inputs = knownVariablesFieldset.querySelectorAll('input');
-
-// inputs.forEach(input => {
-
-//     input.addEventListener('input', () => {
-//         let selectedOptions = variableToCalculateFieldset.querySelectorAll('input[type="radio"]:checked');
-//         result.textContent = `The ${selectedOptions[0].value} is ${Math.floor(calculateProperty(selectedOptions)*100)/100} ${resultUnit}.`;
-//     });
-// });
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+  }
+});
 
 
-
-// knownVariablesFieldset.addEventListener('keydown', function(event) {
-//     if (event.key === 'Enter') {
-//         event.preventDefault();
-//     }
-// });
+// Todo
+// Clear All Button 
+// check if all inputs contain accurate values before showing results
+// Add units to the result
+// 

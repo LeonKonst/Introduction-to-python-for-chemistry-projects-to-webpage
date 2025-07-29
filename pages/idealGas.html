@@ -32,9 +32,9 @@
                 <fieldset id="knownVariables">
                     <legend>Fill the values of the known variables</legend>
 
-                    <div id="pressureInputDiv">
+                    <div id="pressureInputDiv" class="knownInput">
                         <label for="pressureInput"> Pressure</label>
-                        <input type="number" class="knownInput" id="pressureInput" name="pressure" value=1 placeholder="Pressure in atm">
+                        <input type="number"  id="pressureInput" name="pressure" placeholder="Pressure in atm">
                         <select id="pressureUnit" class="unitSelector" name="pressureUnit">
                             <option value="atm" selected>atm</option>
                             <option value="bar">bar</option>
@@ -42,32 +42,32 @@
                         </select>
                     </div>
 
-                    <div id="volumeInputDiv">
+                    <div id="volumeInputDiv" class="knownInput">
                         <label for="volumeInput">Volume</label>
-                        <input type="number" class="knownInput" id="volumeInput" name="volume" value=1 placeholder="Volume in liters">
+                        <input type="number"  id="volumeInput" name="volume" placeholder="Volume in liters">
                         <select id="volumeUnit" class="unitSelector" name="volumeUnit">
                             <option value="liter" selected>l</option>
                             <option value="m3">m³</option>
                         </select>
                     </div>
 
-                    <div id="temperatureInputDiv">
+                    <div id="temperatureInputDiv" class="knownInput">
                         <label for="temperatureInput">Temperature</label>
-                        <input type="number" class="knownInput" id="temperatureInput" name="temperature" value=300 placeholder="Temperature in K">
+                        <input type="number"  id="temperatureInput" name="temperature" placeholder="Temperature in K">
                         <select id="temperatureUnit" class="unitSelector" name="temperatureUnit">
                             <option value="Kelvin" selected>K</option>
                             <option value="celsius">°C</option>
                         </select>
                     </div>
 
-                    <div id="molesInputDiv">
+                    <div id="molesInputDiv" class="knownInput">
                         <label for="molesInput">No. of moles</label>
-                        <input type="number" class="knownInput" id="molesInput" name="moles" value=1 placeholder="Number of moles">
-                        <span class="inputUnits">mol</span>
+                        <input type="number"  id="molesInput" name="moles" placeholder="Number of moles">
+                        <span id="molUnitSpan" class="inputUnits">mol</span>
                     </div>
 
                 </fieldset>
-                <div id="errors">
+                <div id="errors" >
                     <h3>Errors: </h3>
                     <p id="errorPressure"></p>
                     <p id="errorVolume"></p>
@@ -79,7 +79,7 @@
                     <p id="resultValue"></p><p id="resultUnits"></p>
                 </div>
 
-                <button id="clearBtn">Clear all</button>
+                <button type="button" id="clearBtn">Clear all</button>
             </form>
             
 

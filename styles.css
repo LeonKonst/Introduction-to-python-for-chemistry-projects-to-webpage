@@ -118,6 +118,10 @@ label, input {
   margin-bottom: 24px;
 }
 
+#errors{
+  display: none;
+}
+
 #errors p {
   color: red;
   margin-top: 8px;
@@ -133,4 +137,22 @@ label, input {
   padding: 4px;
   border-radius: 4px;
   border: 1px solid #ccc;
+}
+
+input.invalid{
+  border: red 2px solid;
+  box-shadow: red 2px 2px;
+}
+
+input.valid{
+  border: green 2px solid;
+  box-shadow: green 2px 2px;
+}
+
+#molUnitSpan{
+  margin-left:10px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
 }
