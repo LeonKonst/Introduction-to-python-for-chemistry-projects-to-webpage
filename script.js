@@ -229,6 +229,3 @@ function convertTemperature(temperature, unit) {
 }
 
 
-// Todo
-
-// Add units to the result
