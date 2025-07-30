@@ -2,9 +2,20 @@ let variableToCalculateFieldset = document.getElementById('variableToCalculate')
 let knownVariablesFieldset = document.getElementById('knownVariables');
 let result = document.getElementById('resultValue');
 let unitSelectors = document.querySelectorAll(".unitSelector");
-
 let divOfKnownInputs = document.querySelectorAll(".knownInput")
 
+let clearBtn = document.getElementById("clearBtn")
+
+
+clearBtn.addEventListener("click", ()=> {
+    let variableSelectorInputs = variableToCalculateFieldset.querySelectorAll("input");
+    variableSelectorInputs.forEach(input => {
+        input.checked = false;
+    })
+    knownVariablesFieldset.style.display = 'none';
+    result.style.display = "none";
+
+})
 
 function checkAndCalculateOnChange(elements){
     elements.forEach(element =>{
@@ -26,7 +37,6 @@ divOfKnownInputs.forEach(element =>{
                 let inputElement = element.querySelector("input");
                 let unitValue = element.querySelector("select").value;
                 toggleClass(inputElement, inputElement.value > lowerValidLimit(inputElement.name,unitValue));
-                console.log( inputElement.value);
             }
         )
     }
@@ -42,7 +52,7 @@ function lowerValidLimit(variable, unit){
 
 
 variableToCalculateFieldset.addEventListener("change", () => {  
-            displayKnownVariables()
+    displayKnownVariables()
 })
  
 
@@ -54,12 +64,14 @@ function displayKnownVariables(){
     let divs = knownVariablesFieldset.querySelectorAll('div');
     knownVariablesFieldset.style.display = 'block';
     divs.forEach(div => {
+        div.classList.add('visible');
         div.style.display = 'block';
     });
 
     // except the one corresponding to the selected variable
     let selectedInput = document.getElementById(`${selectedOptions[0].value}InputDiv`);
     selectedInput.style.display = 'none';
+    selectedInput.classList.remove('visible');
     return selectedOptions;
 }
 
@@ -130,7 +142,7 @@ document.addEventListener("keydown", (e) => {
 
 
 // Todo
-// Clear All Button 
-// check if all inputs contain accurate values before showing results
+
+// check if all inputs contain accurate values before showing results - visible class was added to visible known variables
 // Add units to the result
 // 
