@@ -87,6 +87,14 @@ fieldset {
   margin-bottom: 24px;
 }
 
+#resultContainer{
+  display:flex;
+}
+
+#resultUnit{
+  display:none;
+}
+
 legend {
   font-weight: bold;
   color: #2a5d84;

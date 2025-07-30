@@ -55,7 +55,7 @@
                         <label for="temperatureInput">Temperature</label>
                         <input type="number"  id="temperatureInput" name="temperature" placeholder="Temperature in K">
                         <select id="temperatureUnit" class="unitSelector" name="temperatureUnit">
-                            <option value="Kelvin" selected>K</option>
+                            <option value="kelvin" selected>K</option>
                             <option value="celsius">°C</option>
                         </select>
                     </div>
@@ -67,16 +67,15 @@
                     </div>
 
                 </fieldset>
-                <div id="errors" >
-                    <h3>Errors: </h3>
-                    <p id="errorPressure"></p>
-                    <p id="errorVolume"></p>
-                    <p id="errorTemperature"></p>
-                    <p id="errorMoles"></p>
-                </div>
+
                 <div id="result">
-                    <h3>Result: </h3>
-                    <p id="resultValue"></p><p id="resultUnits"></p>
+                    
+                    <div id="resultContainer">
+                        <h3 id="resultProperty"></h3>
+                        <p id="resultValue"></p><select id="resultUnit"></select>
+                    </div>
+                    
+                    
                 </div>
 
                 <button type="button" id="clearBtn">Clear all</button>

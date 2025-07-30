@@ -1,8 +1,10 @@
 let variableToCalculateFieldset = document.getElementById('variableToCalculate');
 let knownVariablesFieldset = document.getElementById('knownVariables');
+let calculatedProperty = document.getElementById("resultProperty");
 let result = document.getElementById('resultValue');
 let unitSelectors = document.querySelectorAll(".unitSelector");
-let divOfKnownInputs = document.querySelectorAll(".knownInput")
+let divOfKnownInputs = document.querySelectorAll(".knownInput");
+let selectResultUnit = document.getElementById("resultUnit");
 
 let clearBtn = document.getElementById("clearBtn")
 
@@ -14,6 +16,8 @@ clearBtn.addEventListener("click", ()=> {
     })
     knownVariablesFieldset.style.display = 'none';
     result.style.display = "none";
+    calculatedProperty.innerText = "";
+    selectResultUnit.style.display="none";
 
 })
 
@@ -21,7 +25,7 @@ function checkAndCalculateOnChange(elements){
     elements.forEach(element =>{
         element.addEventListener("change", () => 
             {
-                result.textContent = displayResults();
+                displayResults();
             }
         )
     } )
@@ -55,10 +59,15 @@ function lowerValidLimit(variable, unit){
     return 0;
 }
 
+selectResultUnit.addEventListener("change", () => {
+    displayResults(); // Recalculate and update result
+});
 
 variableToCalculateFieldset.addEventListener("change", () => {  
     displayKnownVariables();
-    result.textContent = displayResults();
+    selectResultUnit.style.display="block";
+    selectResultUnit.innerHTML = unitSelector(displayKnownVariables()[0].value);
+    displayResults();
 })
  
 
@@ -74,6 +83,9 @@ function displayKnownVariables(){
         div.style.display = 'block';
     });
 
+
+    
+
     // except the one corresponding to the selected variable
     let selectedInput = document.getElementById(`${selectedOptions[0].value}InputDiv`);
     selectedInput.style.display = 'none';
@@ -82,17 +94,47 @@ function displayKnownVariables(){
 }
 
 function displayResults(){
-    let resultValue = Math.floor(calculateProperty(displayKnownVariables())*100)/100;
-
-    if(resultValue< 0|| !isFinite(resultValue)){
-        return `Insert valid values at all needed fields.`
+    let resultValue = Math.floor(
+  calculateProperty(displayKnownVariables(), selectResultUnit.value) * 100
+) / 100;
+    
+    if(resultValue < 0.01){
+        calculatedProperty.innerText = "";
+        result.style.display = "block";
+        result.innerText = `Result has a value lower than 0.01.`
+        selectResultUnit.style.display="none";
+    } else if(resultValue <= 0|| !isFinite(resultValue)){
+        calculatedProperty.innerText = "";
+        result.style.display = "block";
+        result.innerText = `Insert valid values at all needed fields.`
+        selectResultUnit.style.display="none";
     } else {
-        return `The ${displayKnownVariables()[0].value} is ${resultValue}.`;
+        selectResultUnit.style.display="block";
+        calculatedProperty.innerText = `The ${displayKnownVariables()[0].value} is:`;
+        result.style.display = "block";
+        result.innerHTML =  `${resultValue}`;
     }
 }
 
 
-function calculateProperty(selectedInput) {
+function unitSelector(property){
+    switch (property) {
+        case 'pressure':
+            return  `<option value="atm" selected>atm</option>
+                <option value="bar">bar</option>
+                <option value="psi">psi</option>.`;
+        case 'volume':
+            return `<option value="liter" selected>l</option>
+                            <option value="m3">m³</option>´.`;
+        case 'temperature':
+            return `<option value="kelvin" selected>K</option>
+                            <option value="celsius">°C</option>.`;
+        case 'moles':
+            return ".";
+    }
+}
+
+function calculateProperty(selectedInput, resultUnit) {
     // fetch the values from the input fields and parse them to float
     let pressure = parseFloat(document.getElementById('pressureInput').value);
     let volume = parseFloat(document.getElementById('volumeInput').value);
@@ -102,16 +144,26 @@ function calculateProperty(selectedInput) {
     pressure = pressureUnitConvesion(pressure, document.getElementById("pressureUnit").value);
     volume = volumeUnitConversion(volume, document.getElementById('volumeUnit').value);
     temperature = temperatureUntiConversion(temperature,document.getElementById("temperatureUnit").value); 
+    
+    let result;
+    
 
     switch (selectedInput[0].value) {
         case 'pressure':
-            return (moles * 0.0821 * temperature) / volume;
+            result = (moles * 0.0821 * temperature) / volume;
+            return convertPressure(result, resultUnit);
+
         case 'volume':
-            return (moles * 0.0821 * temperature) / pressure;
+            result = (moles * 0.0821 * temperature) / pressure;
+            return convertVolume(result, resultUnit);
+
         case 'temperature':
-            return (pressure * volume) / (moles * 0.0821);
+            result = (pressure * volume) / (moles * 0.0821);
+            return convertTemperature(result, resultUnit);
+
         case 'moles':
-            return (pressure * volume) / (0.0821 * temperature);
+            result = (pressure * volume) / (0.0821 * temperature);
+            return result; // moles typically don't need conversion
     }
 }
 
@@ -151,6 +203,30 @@ document.addEventListener("keydown", (e) => {
     e.preventDefault();
   }
 });
+
+
+
+function convertPressure(pressure, unit) {
+    switch (unit) {
+        case 'bar': return pressure / 1.01325;
+        case 'psi': return pressure / 14.6959;
+        default: return pressure; // atm
+    }
+}
+
+function convertVolume(volume, unit) {
+    switch (unit) {
+        case 'm3': return volume / 1000;
+        default: return volume; // liters
+    }
+}
+
+function convertTemperature(temperature, unit) {
+    switch (unit) {
+        case 'celsius': return temperature - 273.15;
+        default: return temperature; // Kelvin
+    }
+}
 
 
 // Todo
