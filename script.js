@@ -35,8 +35,13 @@ divOfKnownInputs.forEach(element =>{
         element.addEventListener("change", () =>
             {
                 let inputElement = element.querySelector("input");
-                let unitValue = element.querySelector("select").value;
-                toggleClass(inputElement, inputElement.value > lowerValidLimit(inputElement.name,unitValue));
+                if(element.id==="molesInputDiv"){
+                    toggleClass(inputElement, inputElement.value > 0);
+                } else{
+                    let unitValue = element.querySelector("select").value;
+                    toggleClass(inputElement, inputElement.value > lowerValidLimit(inputElement.name,unitValue));
+                }
+                
             }
         )
     }
@@ -52,7 +57,8 @@ function lowerValidLimit(variable, unit){
 
 
 variableToCalculateFieldset.addEventListener("change", () => {  
-    displayKnownVariables()
+    displayKnownVariables();
+    result.textContent = displayResults();
 })
  
 
@@ -76,7 +82,13 @@ function displayKnownVariables(){
 }
 
 function displayResults(){
-    return `The ${displayKnownVariables()[0].value} is ${Math.floor(calculateProperty(displayKnownVariables())*100)/100}.`;
+    let resultValue = Math.floor(calculateProperty(displayKnownVariables())*100)/100;
+
+    if(resultValue< 0|| !isFinite(resultValue)){
+        return `Insert valid values at all needed fields.`
+    } else {
+        return `The ${displayKnownVariables()[0].value} is ${resultValue}.`;
+    }
 }
 
 
@@ -143,6 +155,4 @@ document.addEventListener("keydown", (e) => {
 
 // Todo
 
-// check if all inputs contain accurate values before showing results - visible class was added to visible known variables
 // Add units to the result
-// 
