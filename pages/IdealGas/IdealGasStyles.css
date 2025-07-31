@@ -164,8 +164,3 @@ input.valid{
 textarea:focus, input:focus{
     outline: none;
 }
-
-
-#reactionInput{
-  width:200px;
-}
