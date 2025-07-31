@@ -1,3 +1,5 @@
+// Ideal gas calculator
+// -------------------------
 let variableToCalculateFieldset = document.getElementById('variableToCalculate');
 let knownVariablesFieldset = document.getElementById('knownVariables');
 let calculatedProperty = document.getElementById("resultProperty");
@@ -228,4 +230,5 @@ function convertTemperature(temperature, unit) {
     }
 }
 
-
+// Reaction Element finder
+// -----------------------
